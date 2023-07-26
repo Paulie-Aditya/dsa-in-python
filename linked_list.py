@@ -134,6 +134,7 @@ class LinkedList:
                 elif index == 1:
                     curr.next = None
                     return 
+                self.n -=1
         if index == 0:
             return self.delete_head()
         while curr.next.next:
@@ -146,6 +147,7 @@ class LinkedList:
             return 'IndexError'
         
         curr.next = curr.next.next
+        self.n -=1
         return
     
     #Searching
@@ -178,18 +180,23 @@ class LinkedList:
             curr = curr.next
         return f'{result.rstrip("->")}' 
     
+    def reverse(self):
+        #in-place
+        prev_node = None
+        curr_node = self.head
+        while curr_node:
+            next_node = curr_node.next
+            curr_node.next = prev_node
+
+            #shifting both nodes
+            prev_node = curr_node
+            curr_node = next_node
+
+        self.head = prev_node
+    
 
 
 
-L = LinkedList()
-L.insert_head(1)
-L.insert_head(1)
-L.insert_head(2)
-L.insert_head(3)
-L.append(5)
-print(L)
-L.del_by_index(0)
-print(L)
 
 
         
