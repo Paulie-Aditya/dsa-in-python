@@ -136,6 +136,32 @@ class MyList:
         for i in range(self.n):
             sum_ += self.A[i]
         return sum_
+
+    def slice(self, start =0, end=-1, step = 1):
+        if end == -1:
+            end = self.n
+        else:
+            pass
+        
+        result = ''
+        for i in range(start,end,step):
+            result += self.A[i] + ','
+        
+        return f'[{result.rstrip(",")}]'
+    
+    def sort(self):
+        start = 0
+        end = self.n
+        while start<end:
+            min_ = self.A[start]
+            pos = start
+            for i in range(start,end):
+                if self.A[i]<min_:
+                    min_ = self.A[i]
+                    pos = i
+            self.A[start], self.A[pos] = min_ , self.A[start]
+            start +=1
+
     
         
     
@@ -146,11 +172,11 @@ print(len(L))
 L.append(2)
 L.append(3)
 L.append(4)
-L.append(5)
+L.append(1)
 print(L)
 print(L.find(2))
 
-L.insert(0,'Hello')
+L.insert(0,0)
 print(L)
 
 new_list = MyList()
@@ -163,6 +189,8 @@ new_list.append(3)
 print(L)
 print(new_list)
 L.extend(new_list=new_list)
+print(L)
+L.sort()
 print(L)
 
 
