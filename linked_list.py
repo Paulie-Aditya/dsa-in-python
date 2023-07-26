@@ -122,6 +122,32 @@ class LinkedList:
         curr.next = curr.next.next
         self.n -=1
     
+    def del_by_index(self,index):
+        pos = 0
+        curr = self.head
+        if curr == None:
+            return 'Empty LL'
+        if curr.next == None:
+            if index in [0,1]:
+                if index == 0:
+                    return self.delete_head()
+                elif index == 1:
+                    curr.next = None
+                    return 
+        if index == 0:
+            return self.delete_head()
+        while curr.next.next:
+            if pos+1 == index:
+                break
+            pos+=1
+            curr = curr.next
+        
+        if curr == None:
+            return 'IndexError'
+        
+        curr.next = curr.next.next
+        return
+    
     #Searching
 
     def search(self,item):
@@ -160,10 +186,10 @@ L.insert_head(1)
 L.insert_head(1)
 L.insert_head(2)
 L.insert_head(3)
-print(L)
 L.append(5)
 print(L)
-print(L.search(1))
+L.del_by_index(0)
+print(L)
 
 
         
