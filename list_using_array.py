@@ -131,6 +131,7 @@ class MyList:
     def extend(self, new_list):
         for i in range(len(new_list)):
             self.append(new_list[i])
+            
     def sum(self):
         sum_ = 0
         for i in range(self.n):
@@ -145,7 +146,7 @@ class MyList:
         
         result = ''
         for i in range(start,end,step):
-            result += self.A[i] + ','
+            result += str(self.A[i]) + ','
         
         return f'[{result.rstrip(",")}]'
     
