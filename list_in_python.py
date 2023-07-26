@@ -131,7 +131,11 @@ class MyList:
     def extend(self, new_list):
         for i in range(len(new_list)):
             self.append(new_list[i])
-
+    def sum(self):
+        sum_ = 0
+        for i in range(self.n):
+            sum_ += self.A[i]
+        return sum_
     
         
     
