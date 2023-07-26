@@ -47,8 +47,12 @@ class MyList:
         return f'[{result.rstrip(",")}]'
     
     def __getitem__(self,index):
+        #positive indexing
         if 0<=index<self.n:
             return self.A[index]
+        #negative indexing
+        elif -1>=index>= -1*self.n:
+            return self.A[self.n + index]
         else:
             return 'IndexError - Index out of Range'
     
@@ -110,7 +114,25 @@ class MyList:
             self.__delitem__(pos)
         else:
             return pos
+    
+    def min(self):
+        minimum = self.A[0]
+        for i in range(self.n):
+            if self.A[i]<minimum:
+                minimum = self.A[i]
+        return minimum
+    def max(self):
+        maximum = self.A[0]
+        for i in range(self.n):
+            if self.A[i]> maximum:
+                maximum = self.A[i]
+        return maximum
+    
+    def extend(self, new_list):
+        for i in range(len(new_list)):
+            self.append(new_list[i])
 
+    
         
     
 
@@ -125,6 +147,18 @@ print(L)
 print(L.find(2))
 
 L.insert(0,'Hello')
+print(L)
+
+new_list = MyList()
+new_list.append(1)
+new_list.append(2)
+new_list.append(1)
+new_list.append(1)
+new_list.append(3)
+
+print(L)
+print(new_list)
+L.extend(new_list=new_list)
 print(L)
 
 
