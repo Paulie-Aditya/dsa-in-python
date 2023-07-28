@@ -95,6 +95,9 @@ class Dictionary:
             L.append(LinkedList())
         return L
     
+    def __setitem__(self,key,value):
+        self.put(key,value)
+
     def put(self,key,value):
 
         bucket_index = self.hash_function(key)
@@ -106,16 +109,64 @@ class Dictionary:
             self.buckets[bucket_index].append(key,value)
             self.size +=1
 
+            load_factor = self.size/self.capacity
+            if load_factor >= 2: #Load Factor
+                self.rehash()
+
         else:
             #update
             node = self.buckets[bucket_index].get_node_at_index(node_index)
             node.value = value
+
+    def rehash(self):
+        self.capacity = self.capacity*2
+        old_buckets = self.buckets
+        self.size = 0
+        self.buckets = self.make_array(self.capacity)
+
+        for i in old_buckets:
+            for j in range(len(i)):
+                node = i.get_node_at_index(j)
+                key_item = node.key
+                value_item = node.value
+
+                self.put(key_item,value_item)
+
 
     def get_node_index(self,bucket_index, key):
         node_index = self.buckets[bucket_index].search(key)
         return node_index
     def hash_function(self,key):
         return abs(hash(key))% self.capacity
+    
+    #get item
+    #traverse
+    #delete
+
+    def __getitem__(self,key):
+        return self.get(key)
+    def get(self,key):
+        bucket_index = self.hash_function(key)
+        res = self.buckets[bucket_index].search(key)
+
+        if res == -1:
+            return 'Not Found'
+        else:
+            node = self.buckets[bucket_index].get_node_at_index(res)
+            return node.value
+    
+    def __delitem__(self,key):
+        bucket_index = self.hash_function(key)
+        self.size -=1
+        return self.buckets[bucket_index].remove(key)
+    
+    def __str__(self):
+        for i in self.buckets:
+            i.traverse()
+        return ""
+
+
+        
 
 
 
